@@ -22,13 +22,14 @@ public class XPictureClipUtils {
      * 图片裁剪的方法
      *
      * @param fragment
-     * @param file     要裁剪的图片
-     * @param aspectX  裁剪框的 X 方向的比例
-     * @param aspectY  裁剪框的 Y 方向的比例
-     * @param outputX  返回数据的时候的X像素大小
-     * @param outputY  返回数据的时候的Y像素大小
+     * @param file        要裁剪的图片
+     * @param aspectX     裁剪框的 X 方向的比例
+     * @param aspectY     裁剪框的 Y 方向的比例
+     * @param outputX     返回数据的时候的X像素大小
+     * @param outputY     返回数据的时候的Y像素大小
+     * @param packageName 包名
      */
-    public static void startPhotoZoom(Fragment fragment, File file, int aspectX, int aspectY, int outputX, int outputY) {
+    public static void startPhotoZoom(Fragment fragment, File file, int aspectX, int aspectY, int outputX, int outputY, String packageName) {
 
         //com.android.camera.action.CROP，这个action是调用系统自带的图片裁切功能
         Intent intent = new Intent("com.android.camera.action.CROP");
@@ -37,7 +38,7 @@ public class XPictureClipUtils {
         Uri uri;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            uri = FileProvider.getUriForFile(fragment.getContext(), fragment.getContext().getPackageName() + ".fileprovider", file);
+            uri = FileProvider.getUriForFile(fragment.getContext(), packageName + ".fileprovider", file);
             //开启临时访问的读和写权限
             intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
         } else {
@@ -81,18 +82,23 @@ public class XPictureClipUtils {
         fragment.startActivityForResult(intent, REQUEST_CLIP);//裁剪完成的标识
     }
 
+    public static void startPhotoZoom(Fragment fragment, String fileName, int aspectX, int aspectY, int outputX, int outputY, String packageName) {
+        startPhotoZoom(fragment, new File(fileName), aspectX, aspectY, outputX, outputY, packageName);
+    }
+
 
     /**
      * 图片裁剪的方法
      *
      * @param activity
-     * @param file     要裁剪的图片
-     * @param aspectX  裁剪框的 X 方向的比例
-     * @param aspectY  裁剪框的 Y 方向的比例
-     * @param outputX  返回数据的时候的X像素大小
-     * @param outputY  返回数据的时候的Y像素大小
+     * @param file        要裁剪的图片
+     * @param aspectX     裁剪框的 X 方向的比例
+     * @param aspectY     裁剪框的 Y 方向的比例
+     * @param outputX     返回数据的时候的X像素大小
+     * @param outputY     返回数据的时候的Y像素大小
+     * @param packageName 包名
      */
-    public static void startPhotoZoom(Activity activity, File file, int aspectX, int aspectY, int outputX, int outputY) {
+    public static void startPhotoZoom(Activity activity, File file, int aspectX, int aspectY, int outputX, int outputY, String packageName) {
 
         //com.android.camera.action.CROP，这个action是调用系统自带的图片裁切功能
         Intent intent = new Intent("com.android.camera.action.CROP");
@@ -101,7 +107,7 @@ public class XPictureClipUtils {
         Uri uri;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            uri = FileProvider.getUriForFile(activity, activity.getPackageName() + ".fileprovider", file);
+            uri = FileProvider.getUriForFile(activity, packageName + ".fileprovider", file);
             //开启临时访问的读和写权限
             intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
         } else {
@@ -145,6 +151,9 @@ public class XPictureClipUtils {
         activity.startActivityForResult(intent, REQUEST_CLIP);//裁剪完成的标识
     }
 
+    public static void startPhotoZoom(Activity activity, String fileName, int aspectX, int aspectY, int outputX, int outputY, String packageName) {
+        startPhotoZoom(activity, new File(fileName), aspectX, aspectY, outputX, outputY, packageName);
+    }
 
     public static String onActivityResultGetPath(int requestCode, int resultCode, Intent data) {
 
