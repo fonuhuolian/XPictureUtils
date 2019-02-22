@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         XPictureClipUtils.startPhotoZoom(this,
                 new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/1.jpg"),
-                2, 1, 600, 600,getPackageName());
+                2, 1, 600, 600, "org.fonuhuolian.pictureutils.fileprovider");
     }
 
     @Override
