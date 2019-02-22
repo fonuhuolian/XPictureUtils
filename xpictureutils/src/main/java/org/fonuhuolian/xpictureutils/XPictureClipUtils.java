@@ -9,7 +9,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
-import android.text.TextUtils;
 
 import java.io.File;
 
@@ -17,6 +16,7 @@ import static org.fonuhuolian.xpictureutils.XPicture.REQUEST_CLIP;
 
 public class XPictureClipUtils {
 
+    private static String clipPath = "";
 
     /**
      * 图片裁剪的方法
@@ -70,6 +70,7 @@ public class XPictureClipUtils {
         }
 
         File tempFile = new File(dir, System.currentTimeMillis() + ".jpg");
+        clipPath = tempFile.getAbsolutePath();
 
         // 裁剪后的图片Uri路径
         Uri clipUri = Uri.fromFile(tempFile);
@@ -139,6 +140,7 @@ public class XPictureClipUtils {
         }
 
         File tempFile = new File(dir, System.currentTimeMillis() + ".jpg");
+        clipPath = tempFile.getAbsolutePath();
 
         // 裁剪后的图片Uri路径
         Uri clipUri = Uri.fromFile(tempFile);
@@ -155,14 +157,11 @@ public class XPictureClipUtils {
         startPhotoZoom(activity, new File(fileName), aspectX, aspectY, outputX, outputY, authority);
     }
 
-    public static String obtainPathResult(Intent data) {
+    public static String obtainPathResult() {
 
-        String path = "";
+        File file = new File(clipPath);
 
-        if (data != null && !TextUtils.isEmpty(data.getAction())) {
-            path = Uri.parse(data.getAction()).getPath();
-        }
-        return path;
+        return file.exists() ? clipPath : "";
     }
 
 }
