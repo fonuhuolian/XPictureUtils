@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import org.fonuhuolian.xpictureutils.XPicture;
 import org.fonuhuolian.xpictureutils.XPictureClipUtils;
 
 import java.io.File;
@@ -31,10 +32,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        String s = XPictureClipUtils.onActivityResultGetPath(requestCode, resultCode, data);
-
-        Log.e("ddd", s + "---");
-
+        if (requestCode == XPicture.REQUEST_CLIP && resultCode == RESULT_OK) {
+            String s = XPictureClipUtils.onActivityResultGetPath(data);
+            Log.e("ddd", s + "---");
+        }
     }
 }
 
