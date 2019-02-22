@@ -155,7 +155,7 @@ public class XPictureClipUtils {
         startPhotoZoom(activity, new File(fileName), aspectX, aspectY, outputX, outputY, authority);
     }
 
-    public static String onActivityResultGetPath(Intent data) {
+    public static String obtainPathResult(Intent data) {
 
         String path = "";
 

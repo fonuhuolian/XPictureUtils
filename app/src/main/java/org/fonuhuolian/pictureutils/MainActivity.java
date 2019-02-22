@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == XPicture.REQUEST_CLIP && resultCode == RESULT_OK) {
-            String s = XPictureClipUtils.onActivityResultGetPath(data);
+            String s = XPictureClipUtils.obtainPathResult(data);
             Log.e("ddd", s + "---");
         }
     }
