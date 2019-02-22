@@ -1,7 +1,6 @@
 package org.fonuhuolian.pictureutils;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -32,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        Uri data1 = data.getData();
 
         if (requestCode == XPicture.REQUEST_CLIP && resultCode == RESULT_OK) {
             String s = XPictureClipUtils.obtainPathResult();
