@@ -9,10 +9,10 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
 
 import java.io.File;
 
-import static android.app.Activity.RESULT_OK;
 import static org.fonuhuolian.xpictureutils.XPicture.REQUEST_CLIP;
 
 public class XPictureClipUtils {
@@ -155,14 +155,14 @@ public class XPictureClipUtils {
         startPhotoZoom(activity, new File(fileName), aspectX, aspectY, outputX, outputY, authority);
     }
 
-    public static String onActivityResultGetPath(int requestCode, int resultCode, Intent data) {
+    public static String onActivityResultGetPath(Intent data) {
 
-        if (resultCode == RESULT_OK && requestCode == REQUEST_CLIP) {
-            String action = data.getAction();
-            Uri parse = Uri.parse(action);
-            return parse.getPath();
+        String path = "";
+
+        if (data != null && !TextUtils.isEmpty(data.getAction())) {
+            path = Uri.parse(data.getAction()).getPath();
         }
-
-        return "";
+        return path;
     }
+
 }
